@@ -6,6 +6,8 @@ import org.springframework.validation.annotation.Validated;
 import ro.jtonic.isr.yts.validation.model.PersonQuery;
 import ro.jtonic.isr.yts.validation.model.dto.PersonDto;
 import ro.jtonic.isr.yts.validation.repositories.PersonRepository;
+import ro.jtonic.isr.yts.validation.validators.FastValidationGroup;
+import ro.jtonic.isr.yts.validation.validators.ResourceConsumingGroup;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -51,7 +53,9 @@ public class PersonService {
     }
 
     public PersonDto getPersonByQuery1(PersonQuery query) {
-        final Set<ConstraintViolation<PersonQuery>> constraints = validator.validate(query);
+        final Set<ConstraintViolation<PersonQuery>> constraints = validator.validate(query,
+                FastValidationGroup.class,
+                ResourceConsumingGroup.class);
         if (constraints.isEmpty()) {
             return personRepository.getByName(query.getName());
         }

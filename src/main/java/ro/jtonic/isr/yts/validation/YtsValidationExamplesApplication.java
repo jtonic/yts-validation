@@ -18,10 +18,10 @@ public class YtsValidationExamplesApplication {
 		return new MethodValidationPostProcessor();
 	}
 
-/*
 	@Bean
 	public javax.validation.Validator localValidatorFactoryBean() {
-		return new LocalValidatorFactoryBean();
+		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+		localValidatorFactoryBean.getValidationPropertyMap().put("hibernate.validator.fail_fast", "true");
+		return localValidatorFactoryBean;
 	}
-*/
 }

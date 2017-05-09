@@ -2,7 +2,11 @@ package ro.jtonic.isr.yts.validation.model;
 
 import com.google.common.base.MoreObjects;
 import org.hibernate.validator.constraints.NotBlank;
+import ro.jtonic.isr.yts.validation.validators.FastValidationGroup;
 import ro.jtonic.isr.yts.validation.validators.PhoneNumberConstraint;
+import ro.jtonic.isr.yts.validation.validators.ResourceConsumingGroup;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Antonel Ernest Pazargic on 09/05/2017.
@@ -10,10 +14,11 @@ import ro.jtonic.isr.yts.validation.validators.PhoneNumberConstraint;
  * @author Antonel Ernest Pazargic
  */
 public class PersonQuery {
-    @NotBlank(message = "username cannot be empty!")
+    @NotBlank(message = "name cannot be empty!", groups = FastValidationGroup.class)
     private String name;
+    @NotNull(message = "age cannot be null!", groups = FastValidationGroup.class)
     private Integer age;
-    @PhoneNumberConstraint
+    @PhoneNumberConstraint(groups = ResourceConsumingGroup.class)
     private String phoneNumber;
 
     public PersonQuery(String name, Integer age, String phoneNumber) {

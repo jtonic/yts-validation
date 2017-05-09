@@ -24,7 +24,7 @@ public class ExceptionsHandler {
                                  .map(ConstraintViolation::getMessage)
                                  .collect(Collectors.joining(","));
         final ErrorMessage errorMessage = ErrorMessage.builder()
-                                               .message("Invalid value")
+                                               .message("Invalid input")
                                                .description(errDescription)
                                                .build();
         return ResponseEntity.badRequest().body(errorMessage);
