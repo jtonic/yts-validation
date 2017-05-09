@@ -13,6 +13,7 @@ public class PersonDto {
     private String id;
     private String name;
     private Integer age;
+    private String phoneNumber;
 
     public PersonDto() {
         this.id = UUID.randomUUID().toString();
@@ -38,12 +39,21 @@ public class PersonDto {
         this.age = age;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
                           .add("id", id)
                           .add("name", name)
                           .add("age", age)
+                          .add("phone", phoneNumber)
                           .toString();
     }
 }

@@ -11,10 +11,10 @@ public class PhoneNumberValidator implements
     }
  
     @Override
-    public boolean isValid(String contactField,
+    public boolean isValid(String field,
       ConstraintValidatorContext cxt) {
-        return contactField != null && contactField.matches("[0-9]+")
-          && (contactField.length() > 8) && (contactField.length() < 14);
+        return field != null && field.matches("[0-9]+")
+          && (field.length() > 8) && (field.length() < 14);
     }
  
 }
