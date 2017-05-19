@@ -1,6 +1,7 @@
 package ro.jtonic.isr.yts.validation.services;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ro.jtonic.isr.yts.validation.model.PersonQuery;
@@ -11,6 +12,7 @@ import ro.jtonic.isr.yts.validation.validators.ResourceConsumingGroup;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import javax.validation.Validator;
 import java.util.Collection;
 import java.util.Set;
@@ -20,7 +22,7 @@ import java.util.Set;
  *
  * @author Antonel Ernest Pazargic
  */
-@Service
+@Component
 @Validated
 public class PersonService {
 
@@ -52,13 +54,14 @@ public class PersonService {
         return personRepository.getByName(query.getName());
     }
 
-    public PersonDto getPersonByQuery1(PersonQuery query) {
-        final Set<ConstraintViolation<PersonQuery>> constraints = validator.validate(query,
-                FastValidationGroup.class,
-                ResourceConsumingGroup.class);
-        if (constraints.isEmpty()) {
-            return personRepository.getByName(query.getName());
-        }
-        throw new ConstraintViolationException(constraints);
+    public PersonDto getPersonByQuery1(@Valid PersonQuery query) {
+        return null;
+//        final Set<ConstraintViolation<PersonQuery>> constraints = validator.validate(query,
+//                FastValidationGroup.class,
+//                ResourceConsumingGroup.class);
+//        if (constraints.isEmpty()) {
+//            return personRepository.getByName(query.getName());
+//        }
+//        throw new ConstraintViolationException(constraints);
     }
 }
