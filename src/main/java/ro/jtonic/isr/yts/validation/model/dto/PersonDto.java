@@ -1,6 +1,10 @@
 package ro.jtonic.isr.yts.validation.model.dto;
 
 import com.google.common.base.MoreObjects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
@@ -9,6 +13,10 @@ import java.util.UUID;
  *
  * @author Antonel Ernest Pazargic
  */
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 public class PersonDto {
     private String id;
     private String name;

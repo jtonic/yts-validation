@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
+import javax.validation.Validator;
+
 @SpringBootApplication
 public class YtsValidationExamplesApplication {
 
@@ -15,11 +17,13 @@ public class YtsValidationExamplesApplication {
 
 	@Bean
 	public MethodValidationPostProcessor methodValidationPostProcessor() {
-		return new MethodValidationPostProcessor();
+		MethodValidationPostProcessor postProcessor = new MethodValidationPostProcessor();
+		postProcessor.setValidator(localValidatorFactoryBean());
+		return postProcessor;
 	}
 
 	@Bean
-	public javax.validation.Validator localValidatorFactoryBean() {
+	public Validator localValidatorFactoryBean() {
 		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
 		localValidatorFactoryBean.getValidationPropertyMap().put("hibernate.validator.fail_fast", "true");
 		return localValidatorFactoryBean;

@@ -54,6 +54,12 @@ public class PersonResource {
         return ResponseEntity.ok(personService.getPersonByQuery(query));
     }
 
+    @PostMapping("/query2")
+    public String findByPerson(@RequestBody PersonQuery query) {
+        personService.findByPerson(query);
+        return "done";
+    }
+
     @PostMapping("/query1")
     public ResponseEntity<?> findBy1(@RequestBody PersonQuery query) {
         return ResponseEntity.ok(personService.getPersonByQuery1(query));

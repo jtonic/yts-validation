@@ -2,7 +2,6 @@ package ro.jtonic.isr.yts.validation.services;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import ro.jtonic.isr.yts.validation.model.PersonQuery;
 import ro.jtonic.isr.yts.validation.model.dto.PersonDto;
@@ -10,12 +9,10 @@ import ro.jtonic.isr.yts.validation.repositories.PersonRepository;
 import ro.jtonic.isr.yts.validation.validators.FastValidationGroup;
 import ro.jtonic.isr.yts.validation.validators.ResourceConsumingGroup;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.Validator;
 import java.util.Collection;
-import java.util.Set;
+import java.util.Random;
 
 /**
  * Created by Antonel Ernest Pazargic on 09/05/2017.
@@ -54,8 +51,9 @@ public class PersonService {
         return personRepository.getByName(query.getName());
     }
 
+    @Validated({FastValidationGroup.class, ResourceConsumingGroup.class})
     public PersonDto getPersonByQuery1(@Valid PersonQuery query) {
-        return null;
+        return PersonDto.builder().age(new Random().nextInt(50)).name("Antonel").build();
 //        final Set<ConstraintViolation<PersonQuery>> constraints = validator.validate(query,
 //                FastValidationGroup.class,
 //                ResourceConsumingGroup.class);
@@ -63,5 +61,10 @@ public class PersonService {
 //            return personRepository.getByName(query.getName());
 //        }
 //        throw new ConstraintViolationException(constraints);
+    }
+
+    @Validated({FastValidationGroup.class, ResourceConsumingGroup.class})
+    public String findByPerson(@Valid PersonQuery query) {
+        return query.getName();
     }
 }
